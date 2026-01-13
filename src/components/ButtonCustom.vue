@@ -13,7 +13,6 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 const emit = defineEmits(["onClick"]);
 
-// const props = defineProps
 const buttonClases = computed(() => ({
   button: true,
   [`button--${props.size}`]: true,
