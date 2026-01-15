@@ -47,7 +47,7 @@ defineExpose({ toggleDrawer });
           </button>
         </div>
 
-        <div class="drawer__slot">
+        <div class="drawer__slot custom-scroll">
           <slot />
         </div>
       </div>

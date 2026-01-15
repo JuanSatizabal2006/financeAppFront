@@ -10,10 +10,14 @@ interface BillsGetRest {
   };
 }
 
-interface BillManag {
+interface BillCreate {
   name: string;
   price: number;
   categoryId: string;
+}
+
+interface BillUpdate extends BillCreate {
+  id: string;
 }
 
 interface BillManagSucces {
@@ -24,4 +28,4 @@ interface BillManagSucces {
   active: boolean;
 }
 
-export type { BillsGetRest, BillManag, BillManagSucces };
+export type { BillsGetRest, BillCreate, BillManagSucces, BillUpdate };

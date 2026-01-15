@@ -1,17 +1,28 @@
 <script setup lang="ts">
-import { ref, useTemplateRef } from "vue";
+import { nextTick, ref, useTemplateRef } from "vue";
 
 import ListBills from "@src/components/bills/ListBills.vue";
 import ButtonCustom from "@src/components/ButtonCustom.vue";
 import DrawerCustom from "@src/components/DrawerCustom.vue";
 import FormBills from "@src/components/bills/FormBills.vue";
+import type { BillUpdate } from "@src/models/bill.interface";
 
 const drawer = useTemplateRef("drawer");
+const form = useTemplateRef("form");
+
 const drawerOpen = ref(false);
 
 function setOpenDrawer(state: boolean) {
   drawer.value?.toggleDrawer(state);
   drawerOpen.value = state;
+}
+
+async function editBill(bill: BillUpdate) {
+  setOpenDrawer(true);
+
+  await nextTick();
+
+  form.value?.setFormEdit(bill);
 }
 </script>
 
@@ -21,11 +32,15 @@ function setOpenDrawer(state: boolean) {
     <ButtonCustom label="Agregar" @on-click="setOpenDrawer(true)" />
   </header>
   <section>
-    <ListBills />
+    <ListBills @on-edit="editBill" />
   </section>
 
-  <drawer-custom title="Agregar" ref="drawer" @on-close="setOpenDrawer(false)">
-    <form-bills v-if="drawerOpen" @finish-form="setOpenDrawer(false)" />
+  <drawer-custom title="Gasto fijo" ref="drawer" @on-close="setOpenDrawer(false)">
+    <form-bills
+      v-if="drawerOpen"
+      ref="form"
+      @finish-form="setOpenDrawer(false)"
+    />
   </drawer-custom>
 </template>
 

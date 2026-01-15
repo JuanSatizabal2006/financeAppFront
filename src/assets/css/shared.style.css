@@ -27,12 +27,8 @@ button {
 }
 
 .gradient-bg {
-  background: radial-gradient(
-      circle at 100% 90%,
-      oklch(0.2 0.12 285) 0%,
-      transparent 50%
-    ),
-    oklch(0.145 0 0);
+  background: radial-gradient(circle at 100% 90%, #160048 0%, transparent 50%),
+    #0a0a0a;
 }
 
 .title {
@@ -63,8 +59,14 @@ button {
 .card__header {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 12px;
+}
+
+.card__header__content {
+  display: flex;
+  gap: 1rem;
 }
 
 .card__title {
@@ -76,6 +78,13 @@ button {
   font-size: 1.8rem;
   font-weight: 700;
   color: #fff;
+}
+
+.card__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
 }
 
 /*INPUTS*/
@@ -110,4 +119,45 @@ button {
 
 .input-field__error::first-letter {
   text-transform: uppercase;
+}
+
+/*Icon Actions*/
+.icon-action {
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  padding: 6px;
+  border-radius: 0.5rem;
+  transition: background-color 150ms ease-in, color 100ms ease-in;
+  cursor: pointer;
+  color: rgb(var(--color-basic-100));
+}
+
+.icon-action:hover {
+  background-color: #d9e1fa20;
+  backdrop-filter: blur(12px);
+  color: rgb(var(--color-basic-100));
+}
+
+.icon-action--delete {
+  color: #a71018;
+}
+
+/*Custom Scroll*/
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #ffffff20;
+  border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #ffffff40;
 }
