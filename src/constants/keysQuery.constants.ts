@@ -4,4 +4,11 @@ const REFERENCES_KEY = {
   },
 };
 
-export { REFERENCES_KEY };
+const BILL_QUERY_KEYS = {
+  GET: "getBills",
+  POST: "createBill",
+  PUT: "updateBill",
+  DELETE: "deleteBill",
+};
+
+export { REFERENCES_KEY, BILL_QUERY_KEYS };

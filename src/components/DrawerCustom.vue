@@ -9,7 +9,7 @@ const props = defineProps({
   },
 });
 
-// const emit = defineEmits(["onClose"]);
+const emit = defineEmits(["onClose"]);
 
 const isOpen = ref(false);
 
@@ -27,7 +27,7 @@ const drawerStatus = computed(() => ({
 }));
 
 function toggleDrawer(state: boolean) {
-  //   emit("onClose");
+  // emit("onClose");
   isOpen.value = state;
 }
 
@@ -36,13 +36,13 @@ defineExpose({ toggleDrawer });
 
 <template>
   <div class="drawer">
-    <div :class="drawerStatus.overlay" @click="toggleDrawer(false)" />
+    <div :class="drawerStatus.overlay" @click="emit('onClose')" />
 
     <div :class="drawerStatus.container">
       <div class="drawer__header">
         <div class="header__container">
           <h2 class="drawer__title">{{ props.title }}</h2>
-          <button class="title__button" @click="toggleDrawer(false)">
+          <button class="title__button" @click="emit('onClose')">
             <X class="button__close" />
           </button>
         </div>

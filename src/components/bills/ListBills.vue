@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { useGetBills } from "@src/composables/useBill";
 import BadgeCustom from "../BadgeCustom.vue";
+import LoaderCustom from "../LoaderCustom.vue";
 
 const { data, isFetching } = useGetBills();
 </script>
 
 <template>
   <div v-show="isFetching">
-    <h1 style="color: white">Cargando</h1>
+    <loader-custom />
   </div>
   <section v-if="!isFetching" class="list">
     <div
@@ -25,9 +26,9 @@ const { data, isFetching } = useGetBills();
 </template>
 
 <style scoped>
-  .list{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
 </style>

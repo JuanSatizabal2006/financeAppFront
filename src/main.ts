@@ -1,15 +1,19 @@
-import { createApp } from "vue";
+import Vue3Toastify from "vue3-toastify";
 import { VueQueryPlugin } from "@tanstack/vue-query";
-import { createPinia } from "pinia";
-import App from "./App.vue";
-import routes from "./router/index.router";
+import { createApp } from "vue";
+
+import "vue3-toastify/dist/index.css";
 import "./style.css";
 
-const pinia = createPinia();
+import App from "./App.vue";
+import routes from "./router/index.router";
+import { configToast } from "./lib/toast";
+import { vueQueryPluginOptions } from "./lib/tanstackQuery";
+
 const app = createApp(App);
 
 app.use(routes);
-app.use(pinia);
-app.use(VueQueryPlugin);
+app.use(Vue3Toastify, configToast);
+app.use(VueQueryPlugin, vueQueryPluginOptions);
 
 app.mount("#app");

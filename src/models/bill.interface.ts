@@ -1,10 +1,3 @@
-export const BILL_QUERY_KEYS = {
-  GET: "getBills",
-  POST: "createBill",
-  PUT: "updateBill",
-  DELETE: "deleteBill",
-};
-
 interface BillsGetRest {
   id: string;
   name: string;
@@ -13,7 +6,7 @@ interface BillsGetRest {
   active: boolean;
   category: {
     id: string;
-    name: "membresia";
+    name: string;
   };
 }
 
@@ -23,4 +16,12 @@ interface BillManag {
   categoryId: string;
 }
 
-export type { BillsGetRest, BillManag };
+interface BillManagSucces {
+  id: string;
+  name: string;
+  price: number;
+  categoryId: string;
+  active: boolean;
+}
+
+export type { BillsGetRest, BillManag, BillManagSucces };

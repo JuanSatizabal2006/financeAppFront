@@ -6,3 +6,5 @@
 @import url(./components/drawer.style.css);
 @import url(./components/inputField.style.css);
 @import url(./components/selectField.style.css);
+@import url(./components/loader.style.css);
+@import url(./toastify.style.css);

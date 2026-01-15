@@ -1,6 +1,6 @@
 export interface ApiError {
-  status: number;
-  message: string;
+  status?: number;
+  message?: string;
   error?: string;
   errors?: Record<string, string>;
   code?: string;
@@ -13,7 +13,11 @@ export interface FetchOptions extends Omit<RequestInit, "body"> {
   body?: unknown;
 }
 
-export interface ApiResponse<T> {
+export interface ApiResponse<T> extends ApiError {
   data: T;
-  message?: "Gastos fijos encontrados";
+}
+
+export interface ApiSucces<T> {
+  data: T;
+  message: string;
 }
