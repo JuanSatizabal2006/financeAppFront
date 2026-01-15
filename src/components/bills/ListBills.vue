@@ -9,7 +9,7 @@ const { data, isFetching } = useGetBills();
   <div v-show="isFetching">
     <h1 style="color: white">Cargando</h1>
   </div>
-  <template v-if="!isFetching">
+  <section v-if="!isFetching" class="list">
     <div
       v-for="{ id, name, price, category } in data?.data || []"
       className="card"
@@ -21,5 +21,13 @@ const { data, isFetching } = useGetBills();
       </header>
       <p className="card__price">${{ price }}</p>
     </div>
-  </template>
+  </section>
 </template>
+
+<style scoped>
+  .list{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>

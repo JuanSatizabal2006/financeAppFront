@@ -8,8 +8,9 @@ export interface ApiError {
   meta?: unknown;
 }
 
-export interface FetchOptions extends RequestInit {
+export interface FetchOptions extends Omit<RequestInit, "body"> {
   params?: Record<string, string | number>;
+  body?: unknown;
 }
 
 export interface ApiResponse<T> {

@@ -8,7 +8,7 @@
   border-radius: 0.5rem;
   outline: none;
   transition: border-color 150ms ease, box-shadow 150ms ease,
-    background-color 25ms ease;
+    background-color 150ms ease;
 }
 
 .input-field__input:focus {

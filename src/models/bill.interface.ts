@@ -17,4 +17,10 @@ interface BillsGetRest {
   };
 }
 
-export type { BillsGetRest };
+interface BillManag {
+  name: string;
+  price: number;
+  categoryId: string;
+}
+
+export type { BillsGetRest, BillManag };

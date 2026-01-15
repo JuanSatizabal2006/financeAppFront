@@ -8,8 +8,8 @@
   border-radius: 0.5rem;
   outline: none;
   cursor: pointer;
-  transition: border-color 25ms ease, box-shadow 25ms ease,
-    background-color 25ms ease;
+  transition: border-color 300ms ease, box-shadow 300ms ease,
+    background-color 300ms ease;
   appearance: none;
   -webkit-appearance: none;
   text-transform: capitalize;

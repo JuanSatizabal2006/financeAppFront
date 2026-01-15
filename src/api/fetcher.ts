@@ -7,18 +7,19 @@ export async function fetcher<T>(
   url: string,
   options: FetchOptions = {}
 ): Promise<ApiResponse<T>> {
-  const { params, ...init } = options;
+  const { params, body, ...init } = options;
 
   const query = params
     ? "?" + new URLSearchParams(params as Record<string, string>).toString()
     : "";
 
   const response = await fetch(`${API_URL}${url}${query}`, {
+    ...init,
     headers: {
       "Content-Type": "application/json",
       ...init.headers,
     },
-    ...init,
+    body: body ? JSON.stringify(body) : undefined,
   });
 
   if (!response.ok) {
