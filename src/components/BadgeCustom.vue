@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BadgeStatus } from "@src/models/badge.interface";
+import type { BadgeStatus } from "@src/models/components/badge.interface";
 import { computed, type PropType } from "vue";
 
 const props = defineProps({

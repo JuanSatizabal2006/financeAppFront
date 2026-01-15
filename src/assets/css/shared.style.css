@@ -1,3 +1,17 @@
+/*RESET VALUES*/
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+/* ---- */
+
 .glass {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
@@ -35,6 +49,7 @@
   gap: 4px;
 }
 
+/* CARD GLOBAL */
 .card {
   width: 100%;
   padding: 16px;
@@ -63,16 +78,36 @@
   color: #fff;
 }
 
-button {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
+/*INPUTS*/
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-  font: inherit;
-  color: inherit;
-  text-align: inherit;
+.input-field__label {
+  font-weight: 500;
+  color: rgb(var(--color-basic-300));
+  font-size: 0.875rem;
+  cursor: pointer;
+}
 
-  appearance: none;
-  -webkit-appearance: none;
+.input-field__label--required::after {
+  content: "*";
+  color: #ac0505;
+  font-size: 1.2rem;
+  margin: 0 4px;
+}
+
+.input-field__input--error {
+  border-color: #fb2c36 !important;
+}
+
+.input-field__error {
+  font-size: 0.75rem;
+  color: #fb2c36;
+}
+
+.input-field__error::first-letter {
+  text-transform: uppercase;
 }

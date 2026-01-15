@@ -22,7 +22,7 @@
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 20ms cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   text-decoration: none;

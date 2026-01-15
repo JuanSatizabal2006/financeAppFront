@@ -1,13 +1,15 @@
 <script setup lang="ts">
+import { useTemplateRef } from "vue";
+
 import ListBills from "@src/components/bills/ListBills.vue";
 import ButtonCustom from "@src/components/ButtonCustom.vue";
 import DrawerCustom from "@src/components/DrawerCustom.vue";
-import { ref } from "vue";
+import FormBills from "@src/components/bills/FormBills.vue";
 
-const openDrawer = ref(false);
+const drawer = useTemplateRef("drawer");
 
 function setOpenDrawer(state: boolean) {
-  openDrawer.value = state;
+  drawer.value?.toggleDrawer(state);
 }
 </script>
 
@@ -19,12 +21,10 @@ function setOpenDrawer(state: boolean) {
   <section>
     <ListBills />
   </section>
-  <DrawerCustom
-    title="Prueba drawer"
-    :open="openDrawer"
-    @on-close="setOpenDrawer(false)"
-  >
-  </DrawerCustom>
+
+  <drawer-custom title="Prueba drawer" ref="drawer">
+    <form-bills />
+  </drawer-custom>
 </template>
 
 <style scoped>

@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import { X } from "lucide-vue-next";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   title: {
     type: String,
     required: true,
   },
-  open: {
-    type: Boolean,
-    default: false,
-  },
 });
-const emit = defineEmits(["onClose"]);
 
-const isOpen = computed(() => props.open);
+// const emit = defineEmits(["onClose"]);
+
+const isOpen = ref(false);
+
 const drawerStatus = computed(() => ({
   overlay: {
     drawer__overlay: true,
@@ -28,20 +26,23 @@ const drawerStatus = computed(() => ({
   },
 }));
 
-function close() {
-  emit("onClose");
+function toggleDrawer(state: boolean) {
+  //   emit("onClose");
+  isOpen.value = state;
 }
+
+defineExpose({ toggleDrawer });
 </script>
 
 <template>
   <div class="drawer">
-    <div :class="drawerStatus.overlay" @click="close()" />
+    <div :class="drawerStatus.overlay" @click="toggleDrawer(false)" />
 
     <div :class="drawerStatus.container">
       <div class="drawer__header">
         <div class="header__container">
-          <h2 class="drawer__title">{{ title }}</h2>
-          <button class="title__button" @click="close()">
+          <h2 class="drawer__title">{{ props.title }}</h2>
+          <button class="title__button" @click="toggleDrawer(false)">
             <X class="button__close" />
           </button>
         </div>

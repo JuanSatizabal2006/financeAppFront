@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { ButtonProps } from "@src/models/button.interface";
+import type { ButtonProps } from "@src/models/components/button.interface";
+import { LoaderCircle } from "lucide-vue-next";
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   size: "md",
@@ -9,6 +10,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   fullWidth: false,
   iconPosition: "left",
   isDisabled: false,
+  type: "button",
 });
 
 const emit = defineEmits(["onClick"]);
@@ -22,7 +24,13 @@ const buttonClases = computed(() => ({
 </script>
 
 <template>
-  <button :class="buttonClases" @click="emit('onClick')">
+  <button
+    :class="buttonClases"
+    @click="emit('onClick')"
+    :disabled="isDisabled || loading"
+    :type="type"
+  >
+    <LoaderCircle class="button__loader" v-show="loading" />
     {{ label }}
   </button>
 </template>
