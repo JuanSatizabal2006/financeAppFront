@@ -20,7 +20,7 @@ const { data, isFetching } = useGetBills();
         <p className="card__title">{{ name }}</p>
         <BadgeCustom :label="category.name" />
       </header>
-      <p className="card__price">${{ price }}</p>
+      <p className="card__price" v-thousand="{ symbol: '$' }">{{ price }}</p>
     </div>
   </section>
 </template>
