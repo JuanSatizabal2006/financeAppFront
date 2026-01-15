@@ -1,0 +1,17 @@
+.input-field__input {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+  color: #ffffff;
+  background-color: #ffffff0d;
+  border: 1px solid #ffffff1a;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease,
+    background-color 25ms ease;
+}
+
+.input-field__input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #7800bd60;
+}

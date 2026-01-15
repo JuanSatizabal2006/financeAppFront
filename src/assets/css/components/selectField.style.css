@@ -1,0 +1,40 @@
+.input-field__select {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+  color: #ffffff;
+  background-color: rgb(255 255 255 / 0.05);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 0.5rem;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 25ms ease, box-shadow 25ms ease,
+    background-color 25ms ease;
+  appearance: none;
+  -webkit-appearance: none;
+  text-transform: capitalize;
+  
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.25rem;
+}
+
+.input-field__select:focus {
+  box-shadow: 0 0 0 2px #7800bd60;
+}
+
+.input-field__select--error {
+  border-color: #fb2c36;
+}
+
+.select__option {
+  background-color: #081028;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
+.select__option:disabled {
+  background-color: #081028 !important;
+}
