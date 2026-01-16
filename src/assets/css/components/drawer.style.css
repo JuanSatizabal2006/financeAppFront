@@ -34,7 +34,7 @@
   transform: translateX(100%);
 }
 
-.drawer__header {
+.container__main {
   height: 100%;
   width: 24rem;
   background-color: color-mix(in oklab, #0f172b 80%, transparent);
@@ -44,7 +44,7 @@
   border-radius: 0.5rem;
 }
 
-.header__container {
+.drawer__header {
   display: flex;
   align-items: center;
   justify-content: space-between;

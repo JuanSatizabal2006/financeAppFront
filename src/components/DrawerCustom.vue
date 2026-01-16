@@ -39,18 +39,17 @@ defineExpose({ toggleDrawer });
     <div :class="drawerStatus.overlay" @click="emit('onClose')" />
 
     <div :class="drawerStatus.container">
-      <div class="drawer__header">
-        <div class="header__container">
+      <main class="container__main">
+        <header class="drawer__header">
           <h2 class="drawer__title">{{ props.title }}</h2>
           <button class="title__button" @click="emit('onClose')">
             <X class="button__close" />
           </button>
-        </div>
-
+        </header>
         <div class="drawer__slot custom-scroll">
           <slot />
         </div>
-      </div>
+      </main>
     </div>
   </div>
 </template>

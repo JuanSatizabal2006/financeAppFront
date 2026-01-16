@@ -13,17 +13,17 @@ button {
 /* ---- */
 
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: #ffffff0d;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #ffffff1a;
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: color-mix(in oklab, #0f172b 80%, transparent);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 0 10px 2px #ffffff10;
+  border: 1px solid #ffffff10;
 }
 
 .gradient-bg {
@@ -54,6 +54,7 @@ button {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: mounted 500ms ease-in 1;
 }
 
 .card__header {
@@ -160,4 +161,18 @@ button {
 
 .custom-scroll::-webkit-scrollbar-thumb:hover {
   background-color: #ffffff40;
+}
+
+/*Animation mounted*/
+.animation-mounted {
+  animation: mounted 500ms ease-in 1;
+}
+
+@keyframes mounted {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -1,20 +1,33 @@
 <script setup lang="ts">
-import { useGetBills } from "@src/composables/useBill";
+import { useDeleteBill, useGetBills } from "@src/composables/useBill";
 import { ICONS } from "@src/lib/icons";
 
 import BadgeCustom from "../BadgeCustom.vue";
 import LoaderCustom from "../LoaderCustom.vue";
+import { showAlert } from "@src/lib/alert";
 
-const { data, isFetching } = useGetBills();
+const { data, isFetching: loadingGet } = useGetBills();
+const { mutate, isPending: loadingDelete } = useDeleteBill();
 
-const emit = defineEmits(["onEdit", "onDelete"]);
+const emit = defineEmits(["onEdit"]);
+
+async function deleteBill(id: string, name: string) {
+  const { isConfirmed } = await showAlert({
+    title: `¿Estás seguro de eliminar ${name}?`,
+    icon: "question",
+    showCancelButton: true,
+  });
+  if (isConfirmed) {
+    mutate(id);
+  }
+}
 </script>
 
 <template>
-  <div v-show="isFetching">
+  <div v-show="loadingGet || loadingDelete">
     <loader-custom />
   </div>
-  <section v-if="!isFetching" class="list">
+  <section v-if="!loadingGet && !loadingDelete" class="list">
     <div
       v-for="{ id, name, price, category } in data?.data || []"
       class="card"
@@ -26,14 +39,16 @@ const emit = defineEmits(["onEdit", "onDelete"]);
           <BadgeCustom :label="category.name" />
         </div>
         <div class="card__actions">
-          <button>
+          <button @click="deleteBill(id, name)">
             <component
               :is="ICONS.TRASH"
               class="icon-action icon-action--delete"
             />
           </button>
           <button
-            @click="emit('onEdit', { id, name, price, categoryId: category.id })"
+            @click="
+              emit('onEdit', { id, name, price, categoryId: category.id })
+            "
           >
             <component :is="ICONS.PENCIL" class="icon-action" />
           </button>

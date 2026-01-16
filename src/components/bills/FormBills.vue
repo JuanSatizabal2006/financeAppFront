@@ -27,7 +27,6 @@ const { handleSubmit, meta, setFieldError, setValues } = useForm({
 
 const onSubmit = handleSubmit((values) => {
   if (idBill.value) {
-    console.log("edit");
     edit({ ...values, id: idBill.value });
   } else {
     create(values);
