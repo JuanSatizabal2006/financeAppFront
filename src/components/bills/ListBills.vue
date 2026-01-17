@@ -2,9 +2,10 @@
 import { useDeleteBill, useGetBills } from "@src/composables/useBill";
 import { ICONS } from "@src/lib/icons";
 
-import BadgeCustom from "../BadgeCustom.vue";
-import LoaderCustom from "../LoaderCustom.vue";
 import { showAlert } from "@src/lib/alert";
+import BadgeCustom from "../shared/BadgeCustom.vue";
+import LoaderCustom from "../shared/LoaderCustom.vue";
+import FormatedNumber from "../shared/FormatedNumber.vue";
 
 const { data, isFetching: loadingGet } = useGetBills();
 const { mutate, isPending: loadingDelete } = useDeleteBill();
@@ -54,7 +55,7 @@ async function deleteBill(id: string, name: string) {
           </button>
         </div>
       </header>
-      <p class="card__price" v-thousand="{ symbol: '$' }">{{ price }}</p>
+      <formated-number :value="price" size="xl" symbol="$" />
     </div>
   </section>
 </template>

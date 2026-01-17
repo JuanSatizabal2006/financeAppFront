@@ -14,7 +14,7 @@ import type {
   BillCreate,
   BillManagSucces,
   BillUpdate,
-} from "@src/models/bill.interface";
+} from "@src/models/core/bill.interface";
 
 export function useGetBills() {
   return useQuery({

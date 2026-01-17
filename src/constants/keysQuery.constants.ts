@@ -11,4 +11,8 @@ const BILL_QUERY_KEYS = {
   DELETE: "deleteBill",
 };
 
-export { REFERENCES_KEY, BILL_QUERY_KEYS };
+const CREDIT_QUERY_KEYS = {
+  GET: "getCreditCards",
+};
+
+export { REFERENCES_KEY, BILL_QUERY_KEYS, CREDIT_QUERY_KEYS };

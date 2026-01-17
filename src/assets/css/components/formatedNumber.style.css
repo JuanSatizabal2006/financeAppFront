@@ -1,0 +1,26 @@
+.formated-number__value {
+  font-weight: 700;
+  color: #fff;
+}
+
+.formated-number__title {
+  font-size: 0.8rem;
+  color: #b4b4b4;
+  margin-bottom: 4px;
+}
+
+.formated-number__title--md {
+  font-size: 0.8rem;
+}
+
+.formated-number__title--xl {
+  font-size: 1rem;
+}
+
+.formated-number__value--md {
+  font-size: 1.4rem;
+}
+
+.formated-number__value--xl {
+  font-size: 1.8rem;
+}

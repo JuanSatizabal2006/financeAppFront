@@ -36,6 +36,7 @@ const inputProps = computed(() => ({
       :type="type"
       :placeholder="placeholder"
       :required="isRequired"
+      step="any"
     />
 
     <span v-show="errorMessage" class="input-field__error">{{

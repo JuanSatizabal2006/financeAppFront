@@ -2,10 +2,10 @@
 import { nextTick, ref, useTemplateRef } from "vue";
 
 import ListBills from "@src/components/bills/ListBills.vue";
-import ButtonCustom from "@src/components/ButtonCustom.vue";
-import DrawerCustom from "@src/components/DrawerCustom.vue";
+import ButtonCustom from "@src/components/shared/ButtonCustom.vue";
+import DrawerCustom from "@src/components/shared/DrawerCustom.vue";
 import FormBills from "@src/components/bills/FormBills.vue";
-import type { BillUpdate } from "@src/models/bill.interface";
+import type { BillUpdate } from "@src/models/core/bill.interface";
 
 const drawer = useTemplateRef("drawer");
 const form = useTemplateRef("form");
@@ -44,8 +44,3 @@ async function editBill(bill: BillUpdate) {
   </drawer-custom>
 </template>
 
-<style scoped>
-.header {
-  margin-bottom: 0.8rem;
-}
-</style>

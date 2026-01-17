@@ -6,12 +6,13 @@ import { useCreateBills, useUpdateBills } from "@src/composables/useBill";
 import { schemaBills } from "@src/helpers/validations/bills";
 
 import { FORM_BILL } from "@src/constants/keysForms.constants";
-import InputField from "../InputField.vue";
-import SelectField from "../SelectField.vue";
-import ButtonCustom from "../ButtonCustom.vue";
-import type { BillCreate, BillUpdate } from "@src/models/bill.interface";
+import InputField from "../shared/InputField.vue";
+import SelectField from "../shared/SelectField.vue";
+import ButtonCustom from "../shared/ButtonCustom.vue";
+import type { BillCreate, BillUpdate } from "@src/models/core/bill.interface";
 import { computed, ref } from "vue";
 import { setFieldErrors } from "@src/helpers/setFieldErrors";
+import { general } from "@src/language/general";
 
 const { data, isFetching } = useCategories();
 const { mutate: submitCreate, isPending: pendingCreate } = useCreateBills();
@@ -78,7 +79,6 @@ defineExpose({ setFormEdit });
 </script>
 
 <template>
-  <p style="color: white"></p>
   <form @submit="onSubmit" class="form">
     <div class="form__content">
       <input-field
@@ -100,26 +100,10 @@ defineExpose({ setFormEdit });
       />
     </div>
     <button-custom
-      label="Guardar"
+      :label="general.forms.btnSave"
       type="submit"
       :is-disabled="!meta.valid"
       :loading="loading.value"
     />
   </form>
 </template>
-
-<style scoped>
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  height: 100%;
-  justify-content: space-between;
-}
-
-.form__content {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-</style>

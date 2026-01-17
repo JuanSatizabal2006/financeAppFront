@@ -5,7 +5,7 @@ import type {
   BillsGetRest,
   BillManagSucces,
   BillUpdate,
-} from "@src/models/bill.interface";
+} from "@src/models/core/bill.interface";
 
 async function getBills() {
   await sleep(1000);

@@ -45,6 +45,10 @@ button {
   gap: 4px;
 }
 
+.header {
+  margin-bottom: 0.8rem;
+}
+
 /* CARD GLOBAL */
 .card {
   width: 100%;
@@ -75,10 +79,10 @@ button {
   font-size: 1.25rem;
 }
 
-.card__price {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #fff;
+.card__info {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
 }
 
 .card__actions {
@@ -120,6 +124,21 @@ button {
 
 .input-field__error::first-letter {
   text-transform: uppercase;
+}
+
+/*Forms*/
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.form__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /*Icon Actions*/
