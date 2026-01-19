@@ -1,12 +1,11 @@
-import { CREDIT_QUERY_KEYS } from "@src/constants/keysQuery.constants";
-import { showToast } from "@src/lib/toast";
-import type { ApiError, ApiResponse } from "@src/models/api.interface";
-import type { CreateCreditCard, CreditCard } from "@src/models/core/creditCard.interface";
+import { useQuery } from "@tanstack/vue-query";
+import { useMutationLib } from "@src/lib/tanstackQuery";
 import {
   createCreditCard,
   getCreditCards,
+  updateCreditCard,
 } from "@src/services/creditCard.service";
-import { QueryClient, useMutation, useQuery } from "@tanstack/vue-query";
+import { CREDIT_QUERY_KEYS } from "@src/constants/keysQuery.constants";
 
 const useGetCreditCard = () => {
   return useQuery({
@@ -17,16 +16,19 @@ const useGetCreditCard = () => {
 };
 
 const useCreateCreditCard = () => {
-  const queryClient = new QueryClient();
-  return useMutation<ApiResponse<CreditCard>, ApiError, CreateCreditCard>({
+  return useMutationLib({
     mutationFn: createCreditCard,
-    onSuccess: () => {
-      showToast("Tarjeta de credito agregada!", {
-        type: "success",
-      });
-      queryClient.invalidateQueries({ queryKey: [CREDIT_QUERY_KEYS.GET] });
-    },
+    keysRefresh: [CREDIT_QUERY_KEYS.GET],
+    messageToastSuccess: "¡Tarjeta de credito agregada!",
   });
 };
 
-export { useGetCreditCard, useCreateCreditCard };
+const useUpdateCreditCard = () => {
+  return useMutationLib({
+    mutationFn: updateCreditCard,
+    keysRefresh: [CREDIT_QUERY_KEYS.GET],
+    messageToastSuccess: "¡Tarjeta de credito agregada!",
+  });
+};
+
+export { useGetCreditCard, useCreateCreditCard, useUpdateCreditCard };

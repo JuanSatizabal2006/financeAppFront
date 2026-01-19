@@ -2,6 +2,7 @@ import {
   Banknote,
   BanknoteArrowDown,
   BanknoteX,
+  Coins,
   CreditCard,
 } from "lucide-vue-next";
 import type { SideRoute } from "@src/models/layout.interface";
@@ -12,6 +13,7 @@ export const routesTitle = {
   [ROUTES.BILLS]: "Gastos fijos",
   [ROUTES.CREDIT_CARD]: "Tarjetas de credito",
   [ROUTES.DEBTS]: "Deudas",
+  [ROUTES.QUOTAS] : "Cuotas credito"
 };
 
 export const routes: SideRoute[] = [
@@ -34,5 +36,10 @@ export const routes: SideRoute[] = [
     path: ROUTES.CREDIT_CARD,
     icon: CreditCard,
     text: routesTitle[ROUTES.CREDIT_CARD],
+  },
+  {
+    path: ROUTES.QUOTAS,
+    icon: Coins,
+    text: routesTitle[ROUTES.QUOTAS],
   },
 ];

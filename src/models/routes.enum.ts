@@ -3,4 +3,5 @@ export enum ROUTES {
   BILLS = "/bills",
   DEBTS = "/debts",
   CREDIT_CARD = "/credit_card",
+  QUOTAS = "/quotas"
 }

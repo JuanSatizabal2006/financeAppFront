@@ -1,20 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
-
+import { useQuery } from "@tanstack/vue-query";
+import { useMutationLib } from "@src/lib/tanstackQuery";
 import {
   createBill,
   deleteBill,
   editBill,
   getBills,
 } from "../services/bill.service";
-import { showToast } from "@src/lib/toast";
-
 import { BILL_QUERY_KEYS } from "@src/constants/keysQuery.constants";
-import type { ApiError, ApiResponse } from "@src/models/api.interface";
-import type {
-  BillCreate,
-  BillManagSucces,
-  BillUpdate,
-} from "@src/models/core/bill.interface";
 
 export function useGetBills() {
   return useQuery({
@@ -27,45 +19,27 @@ export function useGetBills() {
 }
 
 export function useCreateBills() {
-  const queryClient = useQueryClient();
-  return useMutation<ApiResponse<BillManagSucces>, ApiError, BillCreate>({
+  return useMutationLib({
     mutationFn: createBill,
-    onSuccess: () => {
-      showToast("¡Gasto fijo agregado!", {
-        type: "success",
-      });
-      queryClient.invalidateQueries({ queryKey: [BILL_QUERY_KEYS.GET] });
-    },
+    keysRefresh: [BILL_QUERY_KEYS.GET],
+    messageToastSuccess: "¡Gasto fijo agregado!",
   });
 }
 
 export function useUpdateBills() {
-  const queryClient = useQueryClient();
-  return useMutation<ApiResponse<BillManagSucces>, ApiError, BillUpdate>({
+  return useMutationLib({
     mutationFn: editBill,
-    onSuccess: () => {
-      showToast("¡Gasto fijo editado!", {
-        type: "success",
-      });
-      queryClient.invalidateQueries({ queryKey: [BILL_QUERY_KEYS.GET] });
-    },
+    keysRefresh: [BILL_QUERY_KEYS.GET],
+    messageToastSuccess: "¡Gasto fijo editado!",
   });
 }
 
 export function useDeleteBill() {
-  const queryClient = useQueryClient();
-  return useMutation<ApiResponse<BillManagSucces>, ApiError, string>({
+  return useMutationLib({
     mutationFn: deleteBill,
-    onSuccess: () => {
-      showToast("¡Gasto fijo eliminado!", {
-        type: "success",
-      });
-      queryClient.invalidateQueries({ queryKey: [BILL_QUERY_KEYS.GET] });
-    },
-    onError: (e) => {
-      showToast(e.message || "No se pudo eliminar", {
-        autoClose: 5000,
-      });
-    },
+    keysRefresh: [BILL_QUERY_KEYS.GET],
+    messageToastSuccess: "¡Gasto fijo eliminado!",
+    messageToastError: "No se pudo eliminar",
+    showToastError: true,
   });
 }

@@ -7,22 +7,36 @@ import { FORM_CREDIT_CARD } from "@src/constants/keysForms.constants";
 
 import InputField from "../shared/InputField.vue";
 import ButtonCustom from "../shared/ButtonCustom.vue";
-import { useCreateCreditCard } from "@src/composables/useCreditCard";
-import type { CreateCreditCard } from "@src/models/core/creditCard.interface";
+import {
+  useCreateCreditCard,
+  useUpdateCreditCard,
+} from "@src/composables/useCreditCard";
+import type {
+  CreateCreditCard,
+  UpdateCreditCard,
+} from "@src/models/core/creditCard.interface";
 import { setFieldErrors } from "@src/helpers/setFieldErrors";
+import { computed } from "vue";
 
 const emit = defineEmits(["finishForm"]);
+let idCreditCard = "";
+const loading = computed(() => loadingCreate || loadingEdit);
 
-const { handleSubmit, meta, setFieldError } = useForm({
+const { handleSubmit, meta, setFieldError, setValues } = useForm({
   validationSchema: schemaCreditCard,
 });
 
 const { mutate: submitCreate, isPending: loadingCreate } =
   useCreateCreditCard();
+const { mutate: submitEdit, isPending: loadingEdit } = useUpdateCreditCard();
 
 const onSubmit = handleSubmit((values) => {
   console.log(values);
-  create(values);
+  if (idCreditCard) {
+    edit({ ...values, id: idCreditCard });
+  } else {
+    create(values);
+  }
 });
 
 function create(values: CreateCreditCard) {
@@ -40,22 +54,36 @@ function create(values: CreateCreditCard) {
   });
 }
 
-// function edit(values: BillUpdate) {
-//   submitEdit(values, {
-//     onSuccess: () => {
-//       emit("finishForm");
-//     },
-//     onError: (e) => {
-//       const errors = e?.errors;
-//       const { price, categoryId, name } = values;
-//       const newValues: Omit<BillUpdate, "id"> = { categoryId, name, price };
+function edit(values: UpdateCreditCard) {
+  submitEdit(values, {
+    onSuccess: () => {
+      emit("finishForm");
+    },
+    onError: (e) => {
+      const errors = e?.errors;
+      const { interests, maxTotal, quotaManage, name } = values;
+      const newValues: Omit<UpdateCreditCard, "id"> = {
+        interests,
+        maxTotal,
+        name,
+        quotaManage,
+      };
 
-//       if (errors) {
-//         setFieldErrors(errors, newValues, setFieldError);
-//       }
-//     },
-//   });
-// }
+      if (errors) {
+        setFieldErrors(errors, newValues, setFieldError);
+      }
+    },
+  });
+}
+
+function setFormEdit(values: UpdateCreditCard) {
+  setValues({
+    ...values,
+  });
+  idCreditCard = values.id;
+}
+
+defineExpose({ setFormEdit });
 </script>
 
 <template>
@@ -82,7 +110,7 @@ function create(values: CreateCreditCard) {
       type="submit"
       :label="general.forms.btnSave"
       :is-disabled="!meta.valid"
-      :loading="loadingCreate"
+      :loading="loading.value"
     />
   </form>
 </template>

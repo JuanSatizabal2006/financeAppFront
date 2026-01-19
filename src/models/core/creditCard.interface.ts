@@ -14,4 +14,8 @@ interface CreateCreditCard {
   interests: number;
 }
 
-export type { CreditCard, CreateCreditCard };
+interface UpdateCreditCard extends CreateCreditCard {
+  id: string;
+}
+
+export type { CreditCard, CreateCreditCard, UpdateCreditCard };
