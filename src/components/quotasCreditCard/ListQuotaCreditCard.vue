@@ -1,0 +1,71 @@
+<script setup lang="ts">
+import { useGetQuotasCreditCard } from "@src/composables/useQuotasCreditCard";
+import { ICONS } from "@src/lib/icons";
+import BadgeCustom from "../shared/BadgeCustom.vue";
+import FormatedValue from "@src/components/shared/FormatedValue.vue";
+
+const { data, isFetching } = useGetQuotasCreditCard();
+</script>
+
+<template>
+  <section v-if="!isFetching" class="list">
+    <div
+      class="card"
+      v-for="{
+        id,
+        name,
+        creditCard,
+        price,
+        paidQuotas,
+        priceQuota,
+        purchaseDate,
+        totalQuotas,
+      } in data?.data || []"
+      :key="id"
+    >
+      <header class="card__header">
+        <div class="card__header__content">
+          <p class="card__title">{{ name }}</p>
+          <badge-custom :label="creditCard.name" />
+        </div>
+        <div class="card__actions">
+          <button>
+            <component :is="ICONS.PENCIL" class="icon-action" />
+          </button>
+        </div>
+      </header>
+      <section class="card__info">
+        <formated-value
+          :value="price"
+          symbol="$"
+          title="Valor compra"
+          size="xl"
+          type="number"
+        />
+        <formated-value
+          :value="`${paidQuotas}/${totalQuotas}`"
+          title="Cuotas"
+        />
+        <formated-value
+          :value="priceQuota"
+          symbol="$"
+          title="Precio cuota"
+          type="number"
+        />
+        <formated-value
+          :value="purchaseDate"
+          title="Fecha de compra"
+          type="date"
+        />
+      </section>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+</style>

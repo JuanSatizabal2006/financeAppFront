@@ -27,8 +27,8 @@ button {
 }
 
 .gradient-bg {
-  background: radial-gradient(circle at 100% 90%, #160048 0%, transparent 50%),
-    #0a0a0a;
+  background:
+    radial-gradient(circle at 100% 90%, #160048 0%, transparent 50%), #0a0a0a;
 }
 
 .title {
@@ -83,6 +83,7 @@ button {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .card__actions {
@@ -90,6 +91,19 @@ button {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.2rem;
+}
+
+.info__value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.info__title {
+  font-size: 0.8rem;
+  font-size: 0.8rem;
+  color: #b4b4b4;
+  margin-bottom: 4px;
 }
 
 /*INPUTS*/
@@ -148,7 +162,9 @@ button {
   background-color: transparent;
   padding: 6px;
   border-radius: 0.5rem;
-  transition: background-color 150ms ease-in, color 100ms ease-in;
+  transition:
+    background-color 150ms ease-in,
+    color 100ms ease-in;
   cursor: pointer;
   color: rgb(var(--color-basic-100));
 }

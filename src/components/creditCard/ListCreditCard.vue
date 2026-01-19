@@ -2,7 +2,7 @@
 import { useGetCreditCard } from "@src/composables/useCreditCard";
 import { ICONS } from "@src/lib/icons";
 
-import FormatedNumber from "../shared/FormatedNumber.vue";
+import FormatedValue from "../shared/FormatedValue.vue";
 import LoaderCustom from "@src/components/shared/LoaderCustom.vue";
 
 const { data, isFetching: loadingGet } = useGetCreditCard();
@@ -35,13 +35,25 @@ const emit = defineEmits(["onEdit"]);
         </div>
       </header>
       <section class="card__info">
-        <formated-number :value="maxTotal" symbol="$" title="Cupo" size="xl" />
-        <formated-number
+        <formated-value
+          :value="maxTotal"
+          symbol="$"
+          type="number"
+          title="Cupo"
+          size="xl"
+        />
+        <formated-value
           :value="quotaManage"
           symbol="$"
+          type="number"
           title="Cuota de manejo"
         />
-        <formated-number :value="interests" symbol="%" title="Intereses" />
+        <formated-value
+          :value="interests"
+          symbol="%"
+          type="number"
+          title="Intereses"
+        />
       </section>
     </div>
   </section>

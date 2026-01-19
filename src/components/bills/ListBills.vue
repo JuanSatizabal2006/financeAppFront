@@ -5,7 +5,7 @@ import { ICONS } from "@src/lib/icons";
 import { showAlert } from "@src/lib/alert";
 import BadgeCustom from "../shared/BadgeCustom.vue";
 import LoaderCustom from "../shared/LoaderCustom.vue";
-import FormatedNumber from "../shared/FormatedNumber.vue";
+import FormatedValue from "../shared/FormatedValue.vue";
 
 const { data, isFetching: loadingGet } = useGetBills();
 const { mutate, isPending: loadingDelete } = useDeleteBill();
@@ -55,7 +55,7 @@ async function deleteBill(id: string, name: string) {
           </button>
         </div>
       </header>
-      <formated-number :value="price" size="xl" symbol="$" />
+      <formated-value :value="price" size="xl" symbol="$" type="number" />
     </div>
   </section>
 </template>
