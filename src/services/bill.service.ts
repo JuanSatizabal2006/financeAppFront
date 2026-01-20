@@ -8,7 +8,7 @@ import type {
 } from "@src/models/core/bill.interface";
 
 async function getBills() {
-  await sleep(1000);
+  await sleep(3000);
   return await fetcher<BillsGetRest[]>("/fixedExpenses");
 }
 

@@ -73,14 +73,6 @@
 .button__loader {
   height: 1.25rem;
   width: 1.25rem;
-  animation: spiner 150ms linear infinite;
+  animation: spiner 500ms linear infinite;
 }
 
-@keyframes spiner {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

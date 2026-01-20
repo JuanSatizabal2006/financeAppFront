@@ -4,8 +4,8 @@ import { ICONS } from "@src/lib/icons";
 
 import { showAlert } from "@src/lib/alert";
 import BadgeCustom from "../shared/BadgeCustom.vue";
-import LoaderCustom from "../shared/LoaderCustom.vue";
 import FormatedValue from "../shared/FormatedValue.vue";
+import LoaderWrapper from "../shared/LoaderWrapper.vue";
 
 const { data, isFetching: loadingGet } = useGetBills();
 const { mutate, isPending: loadingDelete } = useDeleteBill();
@@ -25,39 +25,38 @@ async function deleteBill(id: string, name: string) {
 </script>
 
 <template>
-  <div v-show="loadingGet || loadingDelete">
-    <loader-custom />
-  </div>
-  <section v-if="!loadingGet && !loadingDelete" class="list">
-    <div
-      v-for="{ id, name, price, category } in data?.data || []"
-      class="card"
-      :key="id"
-    >
-      <header class="card__header">
-        <div class="card__header__content">
-          <p class="card__title">{{ name }}</p>
-          <BadgeCustom :label="category.name" />
-        </div>
-        <div class="card__actions">
-          <button @click="deleteBill(id, name)">
-            <component
-              :is="ICONS.TRASH"
-              class="icon-action icon-action--delete"
-            />
-          </button>
-          <button
-            @click="
-              emit('onEdit', { id, name, price, categoryId: category.id })
-            "
-          >
-            <component :is="ICONS.PENCIL" class="icon-action" />
-          </button>
-        </div>
-      </header>
-      <formated-value :value="price" size="xl" symbol="$" type="number" />
-    </div>
-  </section>
+  <loader-wrapper :loading="loadingGet || loadingDelete">
+    <section class="list">
+      <div
+        v-for="{ id, name, price, category } in data?.data || []"
+        class="card"
+        :key="id"
+      >
+        <header class="card__header">
+          <div class="card__header__content">
+            <p class="card__title">{{ name }}</p>
+            <BadgeCustom :label="category.name" />
+          </div>
+          <div class="card__actions">
+            <button @click="deleteBill(id, name)">
+              <component
+                :is="ICONS.TRASH"
+                class="icon-action icon-action--delete"
+              />
+            </button>
+            <button
+              @click="
+                emit('onEdit', { id, name, price, categoryId: category.id })
+              "
+            >
+              <component :is="ICONS.PENCIL" class="icon-action" />
+            </button>
+          </div>
+        </header>
+        <formated-value :value="price" size="xl" symbol="$" type="number" />
+      </div>
+    </section>
+  </loader-wrapper>
 </template>
 
 <style scoped>
