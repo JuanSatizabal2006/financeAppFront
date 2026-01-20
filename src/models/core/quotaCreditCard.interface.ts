@@ -15,6 +15,15 @@ interface QuotaCreditCard {
   };
 }
 
+interface QuotaCreditCardCreate {
+  name: string;
+  creditCardId: string;
+  purchaseDate: Date;
+  price: number;
+  totalQuotas: number;
+  paidQuotas: number;
+}
+
 interface CountQuotaCreditCard {
   id: string;
   name: string;
@@ -22,4 +31,4 @@ interface CountQuotaCreditCard {
   totalPurchases: number;
 }
 
-export type { QuotaCreditCard, CountQuotaCreditCard };
+export type { QuotaCreditCard, CountQuotaCreditCard, QuotaCreditCardCreate };

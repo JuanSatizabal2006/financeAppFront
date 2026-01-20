@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useGetQuotasCreditCard } from "@src/composables/useQuotasCreditCard";
-import { ICONS } from "@src/lib/icons";
 import BadgeCustom from "../shared/BadgeCustom.vue";
 import FormatedValue from "@src/components/shared/FormatedValue.vue";
 import CountQuotaCreditCard from "./CountQuotaCreditCard.vue";
@@ -29,11 +28,6 @@ const { data, isFetching } = useGetQuotasCreditCard();
         <div class="card__header__content">
           <p class="card__title">{{ name }}</p>
           <badge-custom :label="creditCard.name" />
-        </div>
-        <div class="card__actions">
-          <button>
-            <component :is="ICONS.PENCIL" class="icon-action" />
-          </button>
         </div>
       </header>
       <section class="card__info">

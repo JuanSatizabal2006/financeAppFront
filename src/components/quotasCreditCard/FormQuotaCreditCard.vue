@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate";
-import { computed } from "vue";
+import { ref, watch } from "vue";
 
 import { general } from "@src/language/general";
 
@@ -15,12 +15,13 @@ import InfoCard from "../shared/InfoCard.vue";
 import { schemaQuotasCreditCard } from "@src/helpers/validations/quotasCreditCard";
 
 import { useGetCreditCardOptions } from "@src/composables/useReferences";
+import { useCreateQuotaCreditCard } from "@src/composables/useQuotasCreditCard";
+import type { QuotaCreditCardCreate } from "@src/models/core/quotaCreditCard.interface";
 
-// const emit = defineEmits(["finishForm"]);
-// let idCreditCard = "";
-// const loading = computed(() => loadingCreate || loadingEdit);
+const emit = defineEmits(["finishForm"]);
+const priceQuota = ref("");
 
-const { handleSubmit, meta, setFieldError, setValues } = useForm({
+const { handleSubmit, meta, setFieldError, values } = useForm({
   validationSchema: schemaQuotasCreditCard,
   initialValues: {
     paidQuotas: 0,
@@ -29,64 +30,48 @@ const { handleSubmit, meta, setFieldError, setValues } = useForm({
 
 const { data: creditCards } = useGetCreditCardOptions();
 
-// const { mutate: submitCreate, isPending: loadingCreate } =
-//   useCreateCreditCard();
-// const { mutate: submitEdit, isPending: loadingEdit } = useUpdateCreditCard();
+const { mutate: submitCreate, isPending: loadingCreate } =
+  useCreateQuotaCreditCard();
+
+watch(
+  values,
+  ({ price, totalQuotas }) => {
+    if (price && totalQuotas) {
+      setPriceQuota(price, totalQuotas);
+    } else {
+      priceQuota.value = "";
+    }
+  },
+  // { deep: true },
+);
+
+function setPriceQuota(pricePurchase: number, totalQuotas: number) {
+  if (isNaN(pricePurchase) || isNaN(totalQuotas)) {
+    return;
+  }
+
+  priceQuota.value =
+    "$" + (pricePurchase / totalQuotas).toLocaleString("de-DE");
+}
 
 const onSubmit = handleSubmit((values) => {
-  console.log(values);
-  // if (idCreditCard) {
-  //   edit({ ...values, id: idCreditCard });
-  // } else {
-  //   create(values);
-  // }
+  create(values);
 });
 
-// function create(values: CreateCreditCard) {
-//   submitCreate(values, {
-//     onSuccess: () => {
-//       emit("finishForm");
-//     },
-//     onError: (e) => {
-//       const errors = e?.errors;
+function create(values: QuotaCreditCardCreate) {
+  submitCreate(values, {
+    onSuccess: () => {
+      emit("finishForm");
+    },
+    onError: (e) => {
+      const errors = e?.errors;
 
-//       if (errors) {
-//         setFieldErrors(errors, values, setFieldError);
-//       }
-//     },
-//   });
-// }
-
-// function edit(values: UpdateCreditCard) {
-//   submitEdit(values, {
-//     onSuccess: () => {
-//       emit("finishForm");
-//     },
-//     onError: (e) => {
-//       const errors = e?.errors;
-//       const { interests, maxTotal, quotaManage, name } = values;
-//       const newValues: Omit<UpdateCreditCard, "id"> = {
-//         interests,
-//         maxTotal,
-//         name,
-//         quotaManage,
-//       };
-
-//       if (errors) {
-//         setFieldErrors(errors, newValues, setFieldError);
-//       }
-//     },
-//   });
-// }
-
-// function setFormEdit(values: UpdateCreditCard) {
-//   setValues({
-//     ...values,
-//   });
-//   idCreditCard = values.id;
-// }
-
-// defineExpose({ setFormEdit });
+      if (errors) {
+        setFieldErrors(errors, values, setFieldError);
+      }
+    },
+  });
+}
 </script>
 
 <template>
@@ -121,12 +106,16 @@ const onSubmit = handleSubmit((values) => {
         label="Cuotas pagadas"
         type="number"
       />
-      <info-card message="El valor de cada cuota será de $100.000" />
+      <info-card
+        v-show="priceQuota"
+        :message="`El valor de cada cuota será de ${priceQuota}`"
+      />
     </div>
     <button-custom
       type="submit"
       :label="general.forms.btnSave"
       :is-disabled="!meta.valid"
+      :loading="loadingCreate"
     />
   </form>
 </template>

@@ -22,7 +22,7 @@ const icon = computed(() => iconByVariant[props.variant]);
 </script>
 
 <template>
-  <div class="info-card" :class="`info-card--${variant}`" role="status">
+  <div class="info-card animation-mounted " :class="`info-card--${variant}`" role="status">
     <span v-if="showIcon" class="info-card__icon" aria-hidden="true">
       <component :is="icon" />
     </span>

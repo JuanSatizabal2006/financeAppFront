@@ -11,16 +11,14 @@ export const schemaQuotasCreditCard = toTypedSchema(
     totalQuotas: yup
       .number()
       .min(1, "Mínimo 1 cuota.")
+      .max(60, "Maxímo 60 cuotas.")
+      .integer("Solo números enteros.")
       .required("Cantidad de cuotas requeridas."),
     creditCardId: yup.string().required("Tarjeta de credito requerida."),
-    paidQuotas: yup.number().positive("No se permiten números negativos."),
+    paidQuotas: yup
+      .number()
+      .min(0, "No se permiten cuotas inferiores a 0")
+      .required("Cantidad de cuotas requeridas."),
     purchaseDate: yup.date().required("Fecha de compra requerida."),
   }),
 );
-
-// NAME: "name",
-//   PRICE: "price",
-//   TOTAL_QUOTAS: "totalQuotas",
-//   CREDIT_CARD: "creditCardId",
-//   PAID_QUOTAS: "paidQuotas",
-//   PURCHASE_DATE: "purchaseDate",
