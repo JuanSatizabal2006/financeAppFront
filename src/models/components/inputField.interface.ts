@@ -1,4 +1,4 @@
-type TypeInputField = "text" | "number" | "email" | "password";
+type TypeInputField = "text" | "number" | "email" | "password" | "date";
 
 interface InputFieldProps {
   label?: string;

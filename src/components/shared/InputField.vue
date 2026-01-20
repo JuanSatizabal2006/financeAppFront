@@ -14,9 +14,10 @@ const inputProps = computed(() => ({
   input: {
     "input-field__input": true,
     "input-field__input--error": errorMessage.value,
+    [`input-field__input--${props.type}`]: true,
   },
   label: {
-    "input-field__label" : true,
+    "input-field__label": true,
     "input-field__label--required": props.isRequired,
   },
 }));

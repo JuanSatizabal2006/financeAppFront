@@ -3,12 +3,14 @@ import { useGetQuotasCreditCard } from "@src/composables/useQuotasCreditCard";
 import { ICONS } from "@src/lib/icons";
 import BadgeCustom from "../shared/BadgeCustom.vue";
 import FormatedValue from "@src/components/shared/FormatedValue.vue";
+import CountQuotaCreditCard from "./CountQuotaCreditCard.vue";
 
 const { data, isFetching } = useGetQuotasCreditCard();
 </script>
 
 <template>
-  <section v-if="!isFetching" class="list">
+  <count-quota-credit-card />
+  <section v-if="!isFetching" class="list-col">
     <div
       class="card"
       v-for="{
@@ -61,11 +63,3 @@ const { data, isFetching } = useGetQuotasCreditCard();
     </div>
   </section>
 </template>
-
-<style scoped>
-.list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-</style>

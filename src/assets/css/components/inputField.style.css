@@ -15,3 +15,8 @@
   outline: none;
   box-shadow: 0 0 0 2px #7800bd60;
 }
+
+.input-field__input--date::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}

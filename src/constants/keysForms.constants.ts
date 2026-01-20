@@ -11,4 +11,13 @@ const FORM_CREDIT_CARD = {
   INTEREST: "interests",
 };
 
-export { FORM_BILL, FORM_CREDIT_CARD };
+const FORM_QUOTA_CREDIT_CARD = {
+  NAME: "name",
+  PRICE: "price",
+  TOTAL_QUOTAS: "totalQuotas",
+  CREDIT_CARD: "creditCardId",
+  PAID_QUOTAS: "paidQuotas",
+  PURCHASE_DATE: "purchaseDate",
+};
+
+export { FORM_BILL, FORM_CREDIT_CARD, FORM_QUOTA_CREDIT_CARD };

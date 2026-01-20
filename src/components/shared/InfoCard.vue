@@ -24,7 +24,7 @@ const icon = computed(() => iconByVariant[props.variant]);
 <template>
   <div class="info-card" :class="`info-card--${variant}`" role="status">
     <span v-if="showIcon" class="info-card__icon" aria-hidden="true">
-      {{ icon }}
+      <component :is="icon" />
     </span>
 
     <p class="info-card__message">

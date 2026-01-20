@@ -15,4 +15,11 @@ interface QuotaCreditCard {
   };
 }
 
-export type { QuotaCreditCard };
+interface CountQuotaCreditCard {
+  id: string;
+  name: string;
+  priceMin: number;
+  totalPurchases: number;
+}
+
+export type { QuotaCreditCard, CountQuotaCreditCard };

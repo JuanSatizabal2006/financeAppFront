@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/vue-query";
-import { REFERENCES_KEY } from "@src/constants/keysQuery.constants";
+import {
+  CREDIT_QUERY_KEYS,
+  REFERENCES_KEY,
+} from "@src/constants/keysQuery.constants";
 import { getCategories } from "@src/services/references.service";
+import { getCreditCards } from "@src/services/creditCard.service";
 
-export function useCategories() {
+function useCategories() {
   return useQuery({
     queryKey: [REFERENCES_KEY.categories.get],
     queryFn: getCategories,
@@ -15,3 +19,14 @@ export function useCategories() {
     refetchOnReconnect: false,
   });
 }
+
+const useGetCreditCardOptions = () => {
+  return useQuery({
+    queryKey: [CREDIT_QUERY_KEYS.GET],
+    queryFn: getCreditCards,
+    placeholderData: { data: [] },
+    select: (response) => response.data.map(({ id, name, maxTotal }) => ({ id, name, maxTotal })),
+  });
+};
+
+export { useCategories, useGetCreditCardOptions };
