@@ -31,7 +31,6 @@ const { mutate: submitCreate, isPending: loadingCreate } =
 const { mutate: submitEdit, isPending: loadingEdit } = useUpdateCreditCard();
 
 const onSubmit = handleSubmit((values) => {
-  console.log(values);
   if (idCreditCard) {
     edit({ ...values, id: idCreditCard });
   } else {

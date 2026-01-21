@@ -33,7 +33,9 @@ const useMutationLib = <TData, TVariables>({
       }
 
       if (keysRefresh?.length !== 0) {
-        queryClient.invalidateQueries({ queryKey: keysRefresh });
+        keysRefresh?.forEach((key) => {
+          queryClient.invalidateQueries({ queryKey: [key] });
+        });
       }
     },
     onError: (e) => {

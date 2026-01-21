@@ -5,7 +5,7 @@ import {
   getCreditCards,
   updateCreditCard,
 } from "@src/services/creditCard.service";
-import { CREDIT_QUERY_KEYS } from "@src/constants/keysQuery.constants";
+import { CREDIT_QUERY_KEYS, QUOTAS_CREDIT_CARD_KEY } from "@src/constants/keysQuery.constants";
 
 const useGetCreditCard = () => {
   return useQuery({
@@ -26,7 +26,7 @@ const useCreateCreditCard = () => {
 const useUpdateCreditCard = () => {
   return useMutationLib({
     mutationFn: updateCreditCard,
-    keysRefresh: [CREDIT_QUERY_KEYS.GET],
+    keysRefresh: [CREDIT_QUERY_KEYS.GET, QUOTAS_CREDIT_CARD_KEY.GET],
     messageToastSuccess: "¡Tarjeta de credito agregada!",
   });
 };

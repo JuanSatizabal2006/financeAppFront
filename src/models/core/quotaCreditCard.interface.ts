@@ -31,4 +31,13 @@ interface CountQuotaCreditCard {
   totalPurchases: number;
 }
 
-export type { QuotaCreditCard, CountQuotaCreditCard, QuotaCreditCardCreate };
+interface QuotaCreditCardUpdate extends QuotaCreditCardCreate {
+  id: string;
+}
+
+export type {
+  QuotaCreditCard,
+  CountQuotaCreditCard,
+  QuotaCreditCardCreate,
+  QuotaCreditCardUpdate,
+};

@@ -7,7 +7,7 @@ import type {
 } from "@src/models/core/creditCard.interface";
 
 async function getCreditCards() {
-  await sleep(1000);
+  await sleep(500);
   return fetcher<CreditCard[]>("/creditCard");
 }
 

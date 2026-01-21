@@ -4,8 +4,10 @@ import BadgeCustom from "../shared/BadgeCustom.vue";
 import FormatedValue from "@src/components/shared/FormatedValue.vue";
 import CountQuotaCreditCard from "./CountQuotaCreditCard.vue";
 import LoaderWrapper from "../shared/LoaderWrapper.vue";
+import { ICONS } from "@src/lib/icons";
 
 const { data, isFetching } = useGetQuotasCreditCard();
+const emit = defineEmits(["onEdit"]);
 </script>
 
 <template>
@@ -30,6 +32,24 @@ const { data, isFetching } = useGetQuotasCreditCard();
           <div class="card__header__content">
             <p class="card__title">{{ name }}</p>
             <badge-custom :label="creditCard.name" />
+          </div>
+          <div class="card__actions">
+            <button
+              @click="
+                emit('onEdit', {
+                  id,
+                  name,
+                  creditCardId: creditCard.id,
+                  price,
+                  paidQuotas,
+                  priceQuota,
+                  purchaseDate,
+                  totalQuotas,
+                })
+              "
+            >
+              <component :is="ICONS.PENCIL" class="icon-action" />
+            </button>
           </div>
         </header>
         <section class="card__info">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useForm } from "vee-validate";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 
 import { general } from "@src/language/general";
 
@@ -15,13 +15,22 @@ import InfoCard from "../shared/InfoCard.vue";
 import { schemaQuotasCreditCard } from "@src/helpers/validations/quotasCreditCard";
 
 import { useGetCreditCardOptions } from "@src/composables/useReferences";
-import { useCreateQuotaCreditCard } from "@src/composables/useQuotasCreditCard";
-import type { QuotaCreditCardCreate } from "@src/models/core/quotaCreditCard.interface";
+import {
+  useCreateQuotaCreditCard,
+  useUpdateQuotaCreditCard,
+} from "@src/composables/useQuotasCreditCard";
+import type {
+  QuotaCreditCardCreate,
+  QuotaCreditCardUpdate,
+} from "@src/models/core/quotaCreditCard.interface";
+import { formatDate } from "@src/lib/dayjs";
 
 const emit = defineEmits(["finishForm"]);
 const priceQuota = ref("");
+const loading = computed(() => loadingCreate || loadingEdit);
+let idQuota = "";
 
-const { handleSubmit, meta, setFieldError, values } = useForm({
+const { handleSubmit, meta, setFieldError, values, setValues } = useForm({
   validationSchema: schemaQuotasCreditCard,
   initialValues: {
     paidQuotas: 0,
@@ -32,6 +41,9 @@ const { data: creditCards } = useGetCreditCardOptions();
 
 const { mutate: submitCreate, isPending: loadingCreate } =
   useCreateQuotaCreditCard();
+
+const { mutate: submitEdit, isPending: loadingEdit } =
+  useUpdateQuotaCreditCard();
 
 watch(
   values,
@@ -55,7 +67,13 @@ function setPriceQuota(pricePurchase: number, totalQuotas: number) {
 }
 
 const onSubmit = handleSubmit((values) => {
-  create(values);
+  if (idQuota) {
+    console.log("values submit =>", values);
+
+    edit({ ...values, id: idQuota });
+  } else {
+    create(values);
+  }
 });
 
 function create(values: QuotaCreditCardCreate) {
@@ -72,6 +90,39 @@ function create(values: QuotaCreditCardCreate) {
     },
   });
 }
+
+function edit(values: QuotaCreditCardUpdate) {
+  submitEdit(values, {
+    onSuccess: () => {
+      emit("finishForm");
+    },
+    onError: (e) => {
+      const errors = e?.errors;
+      const newValues: Omit<QuotaCreditCardUpdate, "id"> = {
+        ...values,
+      };
+
+      if (errors) {
+        setFieldErrors(errors, newValues, setFieldError);
+      }
+    },
+  });
+}
+
+function setFormEdit(values: QuotaCreditCardUpdate) {
+  const purchaseDate = formatDate(
+    values.purchaseDate,
+    "YYYY-MM-DD",
+  ) as unknown as Date;
+
+  setValues({
+    ...values,
+    purchaseDate,
+  });
+  idQuota = values.id;
+}
+
+defineExpose({ setFormEdit });
 </script>
 
 <template>
@@ -115,7 +166,7 @@ function create(values: QuotaCreditCardCreate) {
       type="submit"
       :label="general.forms.btnSave"
       :is-disabled="!meta.valid"
-      :loading="loadingCreate"
+      :loading="loading.value"
     />
   </form>
 </template>

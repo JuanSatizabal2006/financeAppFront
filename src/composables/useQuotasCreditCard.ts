@@ -3,6 +3,7 @@ import { useMutationLib } from "@src/lib/tanstackQuery";
 import {
   createQuotaCreditCard,
   getQuotasCreditCards,
+  updateQuotaCreditCard
 } from "@src/services/quotasCreditCard.service";
 import { useQuery } from "@tanstack/vue-query";
 
@@ -22,4 +23,16 @@ const useCreateQuotaCreditCard = () => {
   });
 };
 
-export { useGetQuotasCreditCard, useCreateQuotaCreditCard };
+const useUpdateQuotaCreditCard = () => {
+  return useMutationLib({
+    mutationFn: updateQuotaCreditCard,
+    messageToastSuccess: "¡Cuota actualizada con éxito!",
+    keysRefresh: [QUOTAS_CREDIT_CARD_KEY.GET],
+  });
+};
+
+export {
+  useGetQuotasCreditCard,
+  useCreateQuotaCreditCard,
+  useUpdateQuotaCreditCard,
+};
